@@ -1,0 +1,24 @@
+services:
+  backend:
+    build: ./backend
+    container_name: ladder-backend
+    ports:
+      - "8000:8000"
+    networks:
+      - ladder-net
+    environment:
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+
+  frontend:
+    build: ./frontend
+    container_name: ladder-frontend
+    ports:
+      - "3000:80"   # host:container, nginx listens on 80
+    depends_on:
+      - backend
+    networks:
+      - ladder-net
+
+networks:
+  ladder-net:
+    driver: bridge

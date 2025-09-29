@@ -1,0 +1,7 @@
+pandas
+jinja2
+fastapi
+uvicorn
+google-genai
+pydantic
+sqlalchemy

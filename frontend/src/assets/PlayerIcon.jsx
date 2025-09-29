@@ -1,0 +1,63 @@
+import React, { useState, useEffect } from 'react';
+
+export function DragIndicator() {
+    const num_dots = 6;
+
+    const dot = (i) => (
+        <div
+            className='rounded-full bg-gray-200 size-1 inset-shadow-sm'
+            key={i}
+        />
+    );
+
+    return (
+        <div
+            className='w-3 flex flex-row flex-wrap gap-[2px] ml-1'
+        >
+            {[...Array(num_dots)].map((_, i) => 
+                dot(i)
+            )}
+        </div>
+    );
+};
+
+
+
+export default function PlayerIcon(props) {
+
+    const data = {
+        primaryColor: props?.primaryColor || '#FFFFFF',
+        secondaryColor: props?.secondaryColor || '000000',
+        name: props?.name || 'test'
+    }
+
+    return (
+    
+        <div 
+            className='size-30 border-white border-2 rounded-xl shadow-lg/35 flex flex-row items-center'
+            style={{backgroundColor: props.primaryColor}}
+        >
+            <DragIndicator />
+            <div
+                className='flex flex-col items-center justify-start gap-y-0'
+                style={{backgroundColor: props.primaryColor}}
+            >
+                <img 
+                    src={props?.src || 'qb-faces/default.png'}
+                    onError={(e) => { e.target.src = 'qb-faces/default.png'; }}
+                    width={80}
+                    height={80}
+                    className="block my-1"
+                    alt="face pixel art"
+                    draggable={false}
+                />
+                <div
+                    className='bg-white/85 font-semibold rounded-md px-1 text-black'
+                >
+                    {props.name}
+                </div>
+            </div>
+            <DragIndicator />
+        </div>
+    )
+}
