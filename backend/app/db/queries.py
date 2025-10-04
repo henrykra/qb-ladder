@@ -1,5 +1,6 @@
 from app.db.session import engine
 from sqlalchemy import text
+import pandas as pd
 
 def get_colors(id: int) -> tuple[str, str]:
     """Get a player's team's primary and secondary color by player id"""
@@ -20,10 +21,25 @@ def get_player(id: int) -> str:
 
     with engine.connect() as connection:
 
-        command = """SELECT q.name FROM quarterbacks q
+        command = """SELECT q.name, q.first_name, q.last_name FROM quarterbacks q
 WHERE q.id = :id;"""
         result = connection.execute(text(command), {'id': id})
 
         row = result.first()
 
-        return row[0]
+        return row
+    
+
+def get_player_stats(id: int) -> str:
+    
+    with engine.connect() as connection:
+        command = """SELECT * FROM stats s,
+WHERE s.player_id = :id;"""
+        result = connection.execute(text(command), {'id': id})
+
+        row = result.first()
+        return row
+
+
+def get_qb_data() -> pd.DataFrame:
+    return pd.read_sql_table('stats', engine)

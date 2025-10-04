@@ -10,6 +10,8 @@ class QB(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, nullable=False)
+    first_name = Column(String, nullable=True)
+    last_name = Column(String, nullable=False)
     team_abbr = Column(Integer, ForeignKey("teams.abbr"))
     
     # relationships

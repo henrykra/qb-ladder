@@ -8,6 +8,8 @@ services:
       - ladder-net
     environment:
       - GEMINI_API_KEY=${GEMINI_API_KEY}
+    volumes:
+      - ./backend/app/db/quarterbacks.db:/app/db/quarterbacks.db
 
   frontend:
     build: ./frontend

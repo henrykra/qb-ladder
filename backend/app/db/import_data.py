@@ -26,7 +26,7 @@ def load_color_data(engine: Engine):
         session.commit()
 
 
-def load_player_data(engine: Engine):
+def load_player_info(engine: Engine):
     inspector = inspect(engine)
     with Session(engine) as session:
         if "quarterbacks" in inspector.get_table_names():
@@ -36,6 +36,20 @@ def load_player_data(engine: Engine):
                 for _, row in df.iterrows():
                     item = QB(id=row.player_id,
                             name=row.player_name,
+                            first_name=row.first_name,
+                            last_name=row.last_name,
                             team_abbr=row.team)
                     session.add(item)
         session.commit()
+
+def load_player_stats(engine: Engine):
+    # too many columns to define a model, use pandas to_sql instead
+    inspector = inspect(engine)
+    with Session(engine) as session:
+        if not "stats" in inspector.get_table_names():
+            df = pd.read_csv(db_path / 'data' / 'quarterback_stats.csv')
+
+            df.to_sql('stats', engine, if_exists='fail', index=False)           
+
+    session.commit()
+         

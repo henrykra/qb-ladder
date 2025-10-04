@@ -65,6 +65,10 @@ class GeminiClient(LLMClient):
             model=self.name,
             contents=prompt,
         ):
-            for word in chunk.text.strip().split(' '):
-                time.sleep(.05)
-                yield word + ' '
+            for letter in chunk.text:
+                time.sleep(.01)
+                yield letter
+            # for word in chunk.text.strip().split(' '):
+            #     time.sleep(.05)
+            #     yield word + ' '
+            

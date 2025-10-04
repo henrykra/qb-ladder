@@ -28,7 +28,8 @@ export default function PlayerIcon(props) {
     const data = {
         primaryColor: props?.primaryColor || '#FFFFFF',
         secondaryColor: props?.secondaryColor || '000000',
-        name: props?.name || 'test'
+        name: props?.name || 'test', 
+        lastName: props?.lastName || 'test'
     }
 
     return (
@@ -54,7 +55,7 @@ export default function PlayerIcon(props) {
                 <div
                     className='bg-white/85 font-semibold rounded-md px-1 text-black'
                 >
-                    {props.name}
+                    {data.lastName}
                 </div>
             </div>
             <DragIndicator />

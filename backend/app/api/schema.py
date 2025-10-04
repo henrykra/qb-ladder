@@ -18,5 +18,7 @@ class ColorResponse(BaseModel):
 
 
 class PlayerResponse(BaseModel):
+    first_name: str
+    last_name: str
     name: str
     id: int

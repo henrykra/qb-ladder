@@ -43,7 +43,8 @@ function App() {
         src: 'qb-faces/' + String(id) + '.png',
         primaryColor: jsonColor.primary_color,
         secondaryColor: jsonColor.secondary_color,
-        lastName: jsonPlayer.name,
+        lastName: jsonPlayer.last_name,
+        name: jsonPlayer.name,
         id: id,
       });
     }
@@ -58,7 +59,7 @@ function App() {
 
   const draggables = data.map((data, index) => (
     <Draggable id={String(index)} key={index} locked={locked} pid={data.id}>
-      <PlayerIcon src={data.src} name={data.lastName} primaryColor={data.primaryColor} secondaryColor={data.secondaryColor}/>
+      <PlayerIcon src={data.src} lastName={data.lastName} primaryColor={data.primaryColor} secondaryColor={data.secondaryColor}/>
     </Draggable>
   ))
 
