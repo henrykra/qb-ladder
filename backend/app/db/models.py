@@ -6,6 +6,7 @@ from app.db.session import Base
 
 # Create models
 class QB(Base):
+    """Model representing rows in the basic QB info table."""
     __tablename__ = 'quarterbacks'
 
     id = Column(Integer, primary_key=True, index=True)
@@ -22,6 +23,7 @@ class QB(Base):
 
 
 class Team(Base):
+    """Model representing rows in the team color info table."""
     __tablename__ = 'teams'
 
     abbr = Column(String, primary_key=True, index=True)

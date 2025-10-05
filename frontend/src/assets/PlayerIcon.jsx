@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export function DragIndicator() {
+    // 6 dots indicating that the icons are draggable
     const num_dots = 6;
 
     const dot = (i) => (
@@ -24,7 +25,7 @@ export function DragIndicator() {
 
 
 export default function PlayerIcon(props) {
-
+    // Player icon given an id, name, and team's color
     const data = {
         primaryColor: props?.primaryColor || '#FFFFFF',
         secondaryColor: props?.secondaryColor || '000000',

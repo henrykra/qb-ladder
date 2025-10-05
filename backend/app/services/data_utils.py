@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 def find_negative_stats(df: pd.DataFrame):
-
+    """Helper function to find exact column names for negative QB stats."""
     negative_values = ['sack', 'interception', 'qb_hit', 'fumble']
     colnames = []
     for val in negative_values:
@@ -11,10 +11,16 @@ def find_negative_stats(df: pd.DataFrame):
 
 
 def normalize_data(df: pd.DataFrame):
+    """Helper function to standardize all dataframe columns with mean=0 and sd=1"""
     return (df - df.mean()) / (df.std())
 
 
 def weighted_random(df:pd.DataFrame):
+    """Take a weighted random selection of statistical columns. 
+    
+    More heavily weights columns tat have more extreme stats (by standardized value)
+    and stats that are simplest to interpret (no filters and no unique rate).
+    """
     # df is a dataframe with columns stat and norm_value
     stat_mask = (df['stat'].str.contains('per') - 1) * -1 + 1 # weight non 'per' columns 2 times as heavy
     values = np.array(df['norm_value'] * (stat_mask))
@@ -23,7 +29,26 @@ def weighted_random(df:pd.DataFrame):
 
 
 def get_supporting_data(ids: list[int], names: list[str], data: pd.DataFrame) -> list[str, str]:
+    """Gets data for LLMs to support an argument against a given ranking. 
+    
+    Focuses on finding the best stats for the bottom ranked quarterback and worst for the top ranked. 
+    Uses semi-random selection of stat options to introduce variety in LLM responses for a given list.
 
+    Arguments
+    ---------
+    ids: list[int]
+        List, in order, of player ids as ranked by the user.
+    names: list[str]
+        List, in order, of player names as ranked by the user.
+    data: pd.DataFrame
+        Dataframe containing all 2024 quarterback stats. 
+        
+    Returns
+    -------
+    list[tuple[str, str]]
+        List of tuples containing each selected stat name and a markdown
+        rendered table of each quarterback's value for that stat and ranking among qualifieds.
+    """
     # filter all data to qualified quarterbacks
     # my definition: >=4 games, >= 150 pass attempts
 
@@ -123,7 +148,9 @@ def get_supporting_data(ids: list[int], names: list[str], data: pd.DataFrame) ->
 
     return render_data_as_md(supporting_stats)
 
+
 def render_data_as_md(df:pd.DataFrame):
+    """Renders tables for each individual stat to markdown."""
     tables = []
     for stat in df['stat'].unique():
         md = (
@@ -136,8 +163,6 @@ def render_data_as_md(df:pd.DataFrame):
         )
         tables.append((stat, md))
     return tables
-
-
 
 
 def get_supporting_data_v2(ids: list[int], names: list[str], data: pd.DataFrame):

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 
 export default function StreamText({enabled, locked, setLocked, loading, setLoading, ranks, draggables}) {
+    // Text box and button for llm integration
     const [text, setText] = useState("");
     const boxRef = useRef(null);
 
@@ -11,16 +12,18 @@ export default function StreamText({enabled, locked, setLocked, loading, setLoad
     }, [text]); // update scroll every time text changes
 
     const handleClick = async () => {
+        // lock the icons when the button is clicked
         setText("\t\t");
         setLoading(true);
         setLocked(true);
 
+        // get the player ids from the current ranking
         const ranking = ranks.map((element, index) => {
             return draggables[element].props.pid;
         })
-        console.log(ranking)
 
         try {
+            // async query the backend api
             const response = await fetch("/api/stream/", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
@@ -40,6 +43,7 @@ export default function StreamText({enabled, locked, setLocked, loading, setLoad
 
                 const chunk = decoder.decode(value, { stream: true });
                 setText((prev) => prev + chunk)
+                // add text to the text box via the streaming response
             }
 
         } catch (err) {
@@ -57,7 +61,9 @@ export default function StreamText({enabled, locked, setLocked, loading, setLoad
                         overflow-y-auto flex flex-col
                             ${enabled ? "" : "opacity-30"} transition-all duration-200`}
             ref={boxRef}>
+            {/* Sticky div at the top of the text box */}
             <div className="sticky top-0 bg-gray-50/90 dark:bg-gray-400/80 py-1 shadow-sm/5 rounded-lg">
+                {/* LLM interaction button */}
                 <button
                     onClick={handleClick}
                     disabled={loading | !enabled}
@@ -73,6 +79,7 @@ export default function StreamText({enabled, locked, setLocked, loading, setLoad
                     {enabled ? "Argue your ranking!" : "Fill out your ranking!"}
                 </div>
             </div>
+            {/* LLM text area */}
             <div className={`${enabled && locked ? 'p-2' : 'p-0'} sm:text-sm md:text-base`}>
                 {enabled && locked ? text : ""}
             </div>
