@@ -50,32 +50,31 @@ export default function StreamText({enabled, locked, setLocked, loading, setLoad
     }
 
     return (
-        <div className={`p-4 h-full ${enabled ? "" : "opacity-30"} transition-all duration-200`}>
-            <div className={`mt-4 w-100% whitespace-pre-wrap border-2
-                            rounded-xl shadow-md/30 bg-gray-50 dark:bg-gray-800/80
-                             ${locked ? "max-h-[90%]" : "max-h-0%"}
-                             transition-all duration-300
-                             overflow-y-auto flex flex-col`}
-                ref={boxRef}>
-                <div className="sticky top-0 bg-gray-50/90 dark:bg-gray-400/80 py-1 shadow-sm/5 rounded-lg">
-                    <button
-                        onClick={handleClick}
-                        disabled={loading | !enabled}
-                        className={`w-20 h-20
-                        my-2 mx-4 border-2 border-white bg-sky-500/70
-                        rounded-full shadow-md/30
-                        transition-all duration-200 ease-in-out
-                        sticky top-0 flex-shrink-0 inline
-                        ${enabled ? "hover:shadow-md/15 cursor-pointer" : ""}`}
-                    > {loading ? "..." : "Press"} </button>
-                    <div
-                        className="inline-block">
-                        {enabled ? "Argue your ranking!" : "Fill out your ranking!"}
-                    </div>
+        <div className={`mt-4 mx-8 w-100% whitespace-pre-wrap border-2
+                        rounded-xl shadow-md/30 bg-gray-50 dark:bg-gray-800/80
+                        ${locked ? "max-h-[90%]" : "max-h-0%"}
+                        transition-all duration-300
+                        overflow-y-auto flex flex-col
+                            ${enabled ? "" : "opacity-30"} transition-all duration-200`}
+            ref={boxRef}>
+            <div className="sticky top-0 bg-gray-50/90 dark:bg-gray-400/80 py-1 shadow-sm/5 rounded-lg">
+                <button
+                    onClick={handleClick}
+                    disabled={loading | !enabled}
+                    className={`w-20 lg:h-20 lg:w-20 md:h-12 md:w-18
+                    my-2 mx-4 border-2 border-white bg-sky-500/70
+                    rounded-full shadow-md/30
+                    transition-all duration-200 ease-in-out
+                    sticky top-0 flex-shrink-0 inline
+                    ${enabled ? "hover:shadow-md/15 cursor-pointer" : ""}`}
+                > {loading ? "..." : "Press"} </button>
+                <div
+                    className="inline-block pr-4 md:text-base sm:text-sm">
+                    {enabled ? "Argue your ranking!" : "Fill out your ranking!"}
                 </div>
-                <div className={`${enabled && locked ? 'p-2' : 'p-0'}`}>
-                    {enabled && locked ? text : ""}
-                </div>
+            </div>
+            <div className={`${enabled && locked ? 'p-2' : 'p-0'} sm:text-sm md:text-base`}>
+                {enabled && locked ? text : ""}
             </div>
         </div>
     );

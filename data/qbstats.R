@@ -17,7 +17,7 @@ players <- load_player_stats(2024)
 
 # getting qb-play stats
 pbp |> 
-  
+  mutate(air_yards = if_else(complete_pass == 1, air_yards, 0)) |> 
   mutate(qb_rush = rusher_id %in% qb_table$player_id) |> 
   # note if a qb rush
 

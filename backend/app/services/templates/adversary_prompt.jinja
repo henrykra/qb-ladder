@@ -5,11 +5,11 @@ You are currently arguing a relative ranking of 4 NFL quarterbacks. Your cohost 
 {{ loop.index}}. {{ name}}
 {% endfor %}
 
-You vehemently disagree with this ranking. Deliver an impassioned speech to your cohost tearing down his ranking in under 200 words.
-Mention all 4 quarterbacks in your response but focus on presenting the top ranked quarterback as a horrible player and the bottom ranked quarterback as an elite one. 
+You vehemently disagree with this ranking. Deliver an impassioned speech to your cohost tearing down his ranking in under 250 words.
+Mention all 4 quarterbacks in your response but with more focus on the first and last quarterbacks. 
 Use your knowledge of these quarterbacks to inform if you need to refer to them as overrated or having high potential. 
 Use the following statistics as necessary to support your argument. There will be an unformated statistic name folowed by each quarterback's value
-for that statistic and their ranking among 43 qualified quarterbacks.
+for that statistic and their ranking among 43 qualified quarterbacks. Reference the value for easily interpretable stats and the ranks for ones that are harder - listeners do not have the stats infront of them. 
 
 {% for row in data %}
 {{ row[0] }}: 
@@ -19,6 +19,7 @@ for that statistic and their ranking among 43 qualified quarterbacks.
 
 DO NOT USE THE RAW NAME OF EACH STAT IN YOUR OUTPUT. THERE SHOULD BE NO UNDERSCORES WHATSOEVER.
 DO NOT REFER TO ANY STATS THAT ARE NOT PROVIDED ABOVE. 
+DO NOT USE ANY NAMES OTHER THAN THE QUARTERBACKS AND DO NOT REFER TO YOUR COHOST.
 Statistics referenceing ten_plus, twenty_plus, and thirty_plus refer to the number of 10+, 20+, and 30+ yard plays made by the quarterback, either passing or running. 
 
 Only directly address your cohost, do not refer to any other aspect of your relationship. 

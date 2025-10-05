@@ -5,7 +5,7 @@ export function DragIndicator() {
 
     const dot = (i) => (
         <div
-            className='rounded-full bg-gray-200 size-1 inset-shadow-sm'
+            className='rounded-full bg-gray-200 lg:size-1 md:size-[3px] sm:size-[2px] inset-shadow-sm'
             key={i}
         />
     );
@@ -35,7 +35,8 @@ export default function PlayerIcon(props) {
     return (
     
         <div 
-            className='size-30 border-white border-2 rounded-xl shadow-lg/35 flex flex-row items-center'
+            className='lg:size-30 md:size-20 sm:size-17 border-white border-2 rounded-xl shadow-lg/35 flex flex-row items-center
+                        transition-all ease-in-out duration-100'
             style={{backgroundColor: props.primaryColor}}
         >
             <DragIndicator />
@@ -48,12 +49,12 @@ export default function PlayerIcon(props) {
                     onError={(e) => { e.target.src = 'qb-faces/default.png'; }}
                     width={80}
                     height={80}
-                    className="block my-1"
+                    className="block my-1 lg:w-20 lg:h-20 md:w-15 md:h-12 sm:w-12 sm:h-10 sm:mb-[-2px] md:mb-1 lg:mb-1"
                     alt="face pixel art"
                     draggable={false}
                 />
                 <div
-                    className='bg-white/85 font-semibold rounded-md px-1 text-black'
+                    className='bg-white/85 font-semibold rounded-md px-1 text-black lg:text-base md:text-sm sm:text-xs'
                 >
                     {data.lastName}
                 </div>

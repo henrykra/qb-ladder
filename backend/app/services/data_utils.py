@@ -37,7 +37,7 @@ def get_supporting_data(ids: list[int], names: list[str], data: pd.DataFrame) ->
     qualified_numeric = qualified.drop(columns='player_id') # drop id column before standardization
     # nomalize data
     qualified_norm = normalize_data(qualified_numeric)
-    qualified_norm['player_id'] = qualified['player_id'].copy()
+    qualified_norm = pd.concat([qualified['player_id'], qualified_norm], axis=1)
 
     negative_columns = find_negative_stats(qualified_norm)
 
