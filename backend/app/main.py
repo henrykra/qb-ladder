@@ -1,11 +1,9 @@
 # fastapi entrypoint
-
 from fastapi import FastAPI
 from app.api.routes import router as api_router
 
 from sqlalchemy import inspect
 from app.db.session import Base, engine
-from app.db.models import QB, Team
 from app.db.import_data import load_color_data, load_player_info, load_player_stats
 
 # startup database
@@ -20,6 +18,7 @@ app = FastAPI()
 
 @app.get('/')
 def root():
+    """Test endpoint"""
     return {"response": "api running.",
             "tables": inspect(engine).get_table_names()}
 

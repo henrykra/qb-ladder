@@ -4,6 +4,7 @@ from app.services.data_utils import get_supporting_data
 import pandas as pd
 
 def load_no_data_template(names: list[str]):
+    """Loads temporary template that doesn't integrate stats."""
     template_path = services_path / 'templates'
     env = Environment(loader=FileSystemLoader(template_path))
 
@@ -12,6 +13,8 @@ def load_no_data_template(names: list[str]):
 
 
 def load_data_template(ids: list[int], names: list[str], data: pd.DataFrame):
+    """Loads adversery template using 2024 quarterback stats. Returns the rendered
+    Jinja template as a string."""
     template_path = services_path / 'templates'
     env = Environment(loader=FileSystemLoader(template_path))
 

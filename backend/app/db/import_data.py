@@ -1,16 +1,13 @@
 import pandas as pd
-from pathlib import Path
-
 from app.db.models import QB, Team
 from app.db.session import engine
-
 from sqlalchemy.orm import Session
 from sqlalchemy import inspect, Engine
-
 from app import db_path
 
 
 def load_color_data(engine: Engine):
+    """Seed database with team color data."""
     inspector = inspect(engine)
     with Session(engine) as session:
 
@@ -27,6 +24,7 @@ def load_color_data(engine: Engine):
 
 
 def load_player_info(engine: Engine):
+    """Seed databse with quarterback basic info (name, team)."""
     inspector = inspect(engine)
     with Session(engine) as session:
         if "quarterbacks" in inspector.get_table_names():
@@ -43,6 +41,7 @@ def load_player_info(engine: Engine):
         session.commit()
 
 def load_player_stats(engine: Engine):
+    """Seed database with 2024 quarterback stats, via pandas."""
     # too many columns to define a model, use pandas to_sql instead
     inspector = inspect(engine)
     with Session(engine) as session:
