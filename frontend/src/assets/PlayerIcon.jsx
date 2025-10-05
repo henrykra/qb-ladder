@@ -31,6 +31,7 @@ export default function PlayerIcon(props) {
         name: props?.name || 'test', 
         lastName: props?.lastName || 'test'
     }
+    console.log(props?.src)
 
     return (
     
